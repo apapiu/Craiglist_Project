@@ -67,7 +67,12 @@ def clean_data(data):
     data.loc[data["name"].str.contains("studio"), "num_bed"] = "Studio" #if num_bed is unknown and contains studio
     
     data["where"] = (data["where"].str.lower()
-                                  .str.replace("no fee", ""))                                 
+                                  .str.replace("no fee", "")) 
+
+    #cleaning up the neighborhood:
+    data["where"] = (data["where"].str.replace(r"[^\w\s-]", " ")
+                              .str.replace(" +", " ")
+                              .str.strip())                                
     
     data["int_bed"] = data["num_bed"]
     data.loc[data.int_bed == "Studio", "int_bed"] = 1
