@@ -1,5 +1,6 @@
 #the pipeline for craigslist:
 
+
 import pandas as pd
 import numpy as np
 import os
@@ -21,6 +22,7 @@ def get_data(site = "newyork", area = None, category = "abo", limit = 25):
 
     data["area"] = site + area if area else site
     return(data)
+
 
 
 #get data from multiple sources, concatenate it and write csv:
@@ -68,6 +70,13 @@ def clean_data(data):
 
     data["where"] = (data["where"].str.lower()
                                   .str.replace("no fee", ""))
+
+    #make area prettier:
+    city_clean_dict = {"newyorkbrk":"Brooklyn", "newyorkmnh":"Manhattan", "sfbaysfc":"San Francisco"}
+    data["area"] = data["area"].map(city_clean_dict)
+
+
+    data = data.drop("id.1", 1)
 
     #cleaning up the neighborhood:
     data["where"] = (data["where"].str.replace(r"[^\w\s-]", " ")

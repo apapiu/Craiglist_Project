@@ -16,10 +16,12 @@ conn = sqlite3.connect("/Users/alexpapiu/Documents/Data/Craigslist/housing.db")
 data = pd.read_sql("select * from cl_housing_clean", conn)
 conn.close()
 
-data = data.drop(["id", "id.1"],axis = 1 )
+data = data.drop(["id"],axis = 1 )
 
 y = data.price
-data["where"][data["where"].isnull()] = "Other"
+
+data.head()
+data.loc[["where"][data["where"].isnull()] = "Other"
 
 
 pop_nbd = data["where"].value_counts().head(50).index
@@ -42,7 +44,7 @@ for loc in nbds:
                 break
         if c == 0:
             good_nbds.append("Other")
- 
+
 data.loc[:,"where"] = good_nbds
 
 val = data.sort_values("datetime")[:5000]
@@ -50,9 +52,13 @@ train = data.sort_values("datetime")[5000:]
 
 y_train = y[5000:]
 
+
+
 data_cat =pd.get_dummies(data[["num_bed", "where", "area"]])
 X_cat = data_cat[5000:]
 #a look at the bags of words:
+
+
 
 vect = TfidfVectorizer(stop_words="english", min_df=2)
 X = vect.fit_transform(train.name)
@@ -64,9 +70,12 @@ X_total = np.hstack([X.toarray(), X_cat])
 model = Ridge()
 model.fit(X_total, y_train)
 
+model.coef_
+
 pd.Series(model.coef_, index = vect.get_feature_names()).sort_values()
 #the coefficients don't make much sense...
 
+
+
 folds = KFold(n = train.shape[0],  n_folds=5)
 np.sqrt(-cross_val_score(model, X, y_train, scoring = "mean_squared_error", cv = folds))
-
