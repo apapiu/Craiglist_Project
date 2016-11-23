@@ -10,10 +10,11 @@ import time
 import datetime
 import sqlite3
 
-#functions:
+#main functions:
 
-#scrape the data and return a pandas df:
 def get_data(site = "newyork", area = None, category = "abo", limit = 25):
+    """ scrape the data and return a pandas df """
+
     cl = CraigslistHousing(site=site, area=area, category=category)
     results = cl.get_results(sort_by='newest', limit = limit)
 
@@ -25,8 +26,9 @@ def get_data(site = "newyork", area = None, category = "abo", limit = 25):
 
 
 
-#get data from multiple sources, concatenate it and write csv:
 def write_data(limit = 25):
+    """get data from multiple sources, concatenate it and write csv"""
+
     timez = time.strftime("%Y-%m-%d %H:%M:%S")
 
     data = pd.concat([get_data(area = "brk", limit = limit),
@@ -37,8 +39,9 @@ def write_data(limit = 25):
     link = link.replace(" ", "")
     data.to_csv(link)
 
-#get df and insert it in a sqlite database:
 def data_to_sql(limit = 25):
+    """get df and insert it in a sqlite database """
+
 
     os.chdir("/Users/alexpapiu/Documents/Data/Craigslist")
     data = pd.concat([get_data(area = "brk", limit = limit),
@@ -51,7 +54,7 @@ def data_to_sql(limit = 25):
 
 #data_to_sql(2500)
 
-#clean function:
+
 def clean_data(data):
     data.datetime = pd.to_datetime(data.datetime)
     data["sq_feet"] = data["sq_feet"].astype(float)
