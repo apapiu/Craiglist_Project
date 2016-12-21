@@ -1,4 +1,3 @@
-
 import os
 
 import pandas as pd
@@ -7,9 +6,7 @@ import sqlite3
 from sklearn.linear_model import Ridge, Lasso, LassoCV, RidgeCV
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.cross_validation import cross_val_score, KFold, train_test_split
-
 from sklearn import metrics
-
 
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
@@ -22,9 +19,12 @@ conn = sqlite3.connect("/Users/alexpapiu/Documents/Data/Craigslist/housing.db")
 data = pd.read_sql("select * from cl_housing_clean", conn)
 conn.close()
 
-data = data.drop(["id"],axis = 1 )
+data = data.drop(["id"], axis = 1)
+
+
 
 data.dtypes
+
 
 data = data[data.area == "San Francisco"]
 data = data[data.int_bed == 1]
@@ -34,23 +34,44 @@ data = data.reset_index()
 data.head()
 
 
+data.isnull().sum()
 
-
-
-X
+data["where"]
 
 cols = ["has_image", "num_bed", "where", "hour", "dayofweek"]
 X_num = pd.get_dummies(data[cols])
 y = data["price"]
 
+X_num
+
+
+data["where"] = data["where"].fillna("Other")
+
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
+loc_label = LabelEncoder()
+loc_enc = OneHotEncoder()
+num_bed_enc = OneHotEncoder()
+
+where_enc = loc_label.fit_transform(data["where"])
+X_where = loc_enc.fit_transform(loc_label.fit_transform(data["where"]))
+
+
+X_num
+
+X_num
 
 X_tr, X_val, y_tr, y_val = train_test_split(X_num, y, random_state = 3)
 
 model = Ridge(alpha = 1)
 #model = RandomForestRegressor(n_estimators = 100)
 
+
+
 model.fit(X_tr, y_tr)
 #model.fit(X_tr, np.log1p(y_tr))
+
+
+
 
 
 preds = model.predict(X_val)
@@ -76,12 +97,11 @@ X = pd.DataFrame(X.toarray(), columns = vect.get_feature_names())
 X
 
 
+
 X_all = pd.concat((X, X_num), 1)
 
-X.shape
-X_num.shape
 
-X_all.shape
+
 
 X_tr, X_val, y_tr, y_val = train_test_split(X_all, y, random_state = 3)
 
@@ -93,12 +113,13 @@ model = Ridge(alpha = 1)
 #model = RandomForestRegressor(n_estimators = 100)
 
 model.fit(X_tr, y_tr)
+
 #model.fit(X_tr, np.log1p(y_tr))
 
 
+
+
 preds = model.predict(X_val)
-
-
 
 naive_preds = np.repeat(np.mean(y_tr), X_val.shape[0])
 

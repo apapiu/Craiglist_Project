@@ -1,0 +1,87 @@
+1480055376428	Marionette	INFO	Listening on port 64692
+1480055377540	Marionette	INFO	startBrowser eb82e02c-c908-f447-bb96-dfc4b99ce876
+1480055377550	Marionette	INFO	sendAsync eb82e02c-c908-f447-bb96-dfc4b99ce876
+1480055378186	Marionette	INFO	sendAsync eb82e02c-c908-f447-bb96-dfc4b99ce876
+1480055420059	Marionette	INFO	sendAsync eb82e02c-c908-f447-bb96-dfc4b99ce876
+1480055512840	Marionette	INFO	Listening on port 64964
+1480055513968	Marionette	INFO	startBrowser 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055513979	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055514471	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055519667	Marionette	INFO	sendAsync eb82e02c-c908-f447-bb96-dfc4b99ce876
+1480055528758	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055534764	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055559024	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055560590	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055562019	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055563477	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055607802	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055607811	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055607947	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055607971	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055607990	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055608005	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055608029	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055608105	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055608498	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055608617	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055608728	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055609017	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055609132	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055609237	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055609259	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055609268	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055609278	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055609285	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055609293	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055609300	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055813688	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+1480055839993	Marionette	INFO	sendAsync 003daa9e-aff1-d646-bddc-e4556228eb0c
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x48010C,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://global/content/process-content.js, line 30: NS_ERROR_UNEXPECTED: Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIMessageSender.sendAsyncMessage]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x48010C,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://global/content/process-content.js, line 30: NS_ERROR_UNEXPECTED: Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIMessageSender.sendAsyncMessage]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x48010C,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://global/content/process-content.js, line 30: NS_ERROR_UNEXPECTED: Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIMessageSender.sendAsyncMessage]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x48010C,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://global/content/process-content.js, line 30: NS_ERROR_UNEXPECTED: Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIMessageSender.sendAsyncMessage]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x48010C,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://global/content/process-content.js, line 30: NS_ERROR_UNEXPECTED: Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIMessageSender.sendAsyncMessage]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x48010C,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://global/content/process-content.js, line 30: NS_ERROR_UNEXPECTED: Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIMessageSender.sendAsyncMessage]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x48010C,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://global/content/process-content.js, line 30: NS_ERROR_UNEXPECTED: Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIMessageSender.sendAsyncMessage]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x48010C,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://global/content/process-content.js, line 30: NS_ERROR_UNEXPECTED: Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIMessageSender.sendAsyncMessage]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x48010C,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://global/content/process-content.js, line 30: NS_ERROR_UNEXPECTED: Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIMessageSender.sendAsyncMessage]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x48010C,name=PContent::Msg_AsyncMessage) Channel closing: too late to send/recv, messages will be lost
+
+JavaScript error: chrome://global/content/process-content.js, line 30: NS_ERROR_UNEXPECTED: Component returned failure code: 0x8000ffff (NS_ERROR_UNEXPECTED) [nsIMessageSender.sendAsyncMessage]
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x2C0042,name=PBrowser::Msg___delete__) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x4800B5,name=PContent::Msg_ConsoleMessage) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][OnMaybeDequeueOne] Error: Channel closing: too late to send/recv, messages will be lost
+

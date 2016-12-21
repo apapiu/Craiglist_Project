@@ -1,6 +1,4 @@
 #the pipeline for craigslist:
-
-
 import pandas as pd
 import numpy as np
 import os
@@ -11,6 +9,7 @@ import datetime
 import sqlite3
 
 #main functions:
+
 
 def get_data(site = "newyork", area = None, category = "abo", limit = 25):
     """ scrape the data and return a pandas df """
@@ -23,7 +22,6 @@ def get_data(site = "newyork", area = None, category = "abo", limit = 25):
 
     data["area"] = site + area if area else site
     return(data)
-
 
 
 def write_data(limit = 25):
@@ -46,10 +44,13 @@ def data_to_sql(limit = 25):
     os.chdir("/Users/alexpapiu/Documents/Data/Craigslist")
     data = pd.concat([get_data(area = "brk", limit = limit),
                       get_data(area = "mnh", limit = limit),
+                      #get rooms too:
+                      get_data(area = "brk", category = "roo?bundleDuplicates=1&availabilityMode=0"),
+                      get_data(area = "mnh", category = "roo?bundleDuplicates=1&availabilityMode=0"),
                       get_data(site = "sfbay", area="sfc", category="apa", limit = limit)])
 
     conn = sqlite3.connect("housing.db")
-    data.to_sql("cl_housing", con = conn,  index = False, if_exists="append")
+    data.to_sql("cl_housing", con = conn, index = False, if_exists="append")
     conn.close()
 
 #data_to_sql(2500)
