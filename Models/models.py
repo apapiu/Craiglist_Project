@@ -22,23 +22,39 @@ conn.close()
 data = data.drop(["id"], axis = 1)
 
 
-
-data.dtypes
-
-
-data = data[data.area == "San Francisco"]
-data = data[data.int_bed == 1]
-data = data[data.price < 10000]
+data = data.query("price < 10000 & area == 'San Francisco' & int_bed == 1")
 data = data.reset_index()
 
 data.head()
 
+data["where"] = data["where"].fillna("other")
 
-data.isnull().sum()
-
-data["where"]
 
 cols = ["has_image", "num_bed", "where", "hour", "dayofweek"]
+data_num = data[cols]
+
+data_num
+
+data["where"].value_counts()
+
+
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
+loc_label = LabelEncoder()
+loc_enc = OneHotEncoder()
+num_bed_enc = OneHotEncoder()
+
+temp = ["cat", "dog", "cat"]
+
+loc_label.fit(temp)
+
+loc_label.transform(["hey"])
+
+
+
+
+
+
+
 X_num = pd.get_dummies(data[cols])
 y = data["price"]
 

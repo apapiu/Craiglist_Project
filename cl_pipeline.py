@@ -8,20 +8,28 @@ import time
 import datetime
 import sqlite3
 
+from sklearn.linear_model import Ridge, Lasso, LassoCV, RidgeCV
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.cross_validation import cross_val_score, KFold, train_test_split
+from sklearn import metrics
+
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+
+
 #main functions:
 
-
-def get_data(site = "newyork", area = None, category = "abo", limit = 25):
+def get_data(site = "newyork", area = None, category = "abo", limit = 25, geotagged = True):
     """ scrape the data and return a pandas df """
 
     cl = CraigslistHousing(site=site, area=area, category=category)
-    results = cl.get_results(sort_by='newest', limit = limit)
+    results = cl.get_results(sort_by='newest', limit = limit, geotagged = geotagged)
 
     data = pd.DataFrame(results)
     data.index = data["id"]
 
     data["area"] = site + area if area else site
     return(data)
+
 
 
 def write_data(limit = 25):
@@ -57,6 +65,8 @@ def data_to_sql(limit = 25):
 
 
 def clean_data(data):
+    data = data.drop_duplicates()
+
     data.datetime = pd.to_datetime(data.datetime)
     data["sq_feet"] = data["sq_feet"].astype(float)
 
@@ -67,7 +77,7 @@ def clean_data(data):
                 .assign(hour = data["datetime"].dt.hour, #extract time feats
                         dayofweek = data["datetime"].dt.dayofweek))
 
-    data.loc[data["num_bed"].isin(["5", "6", "7", "8"]), "num_bed"] = "5 or more" #coalesce high num_bed
+    #data.loc[data["num_bed"].isin(["5", "6", "7", "8"]), "num_bed"] = "5 or more" #coalesce high num_bed
 
     data["name"] = data["name"].str.lower()
     data.loc[data["name"].str.contains("studio"), "num_bed"] = "Studio" #if num_bed is unknown and contains studio
@@ -80,7 +90,10 @@ def clean_data(data):
     data["area"] = data["area"].map(city_clean_dict)
 
 
-    data = data.drop("id.1", 1)
+    try:
+        data = data.drop("id.1", 1)
+    except:
+        pass
 
     #cleaning up the neighborhood:
     data["where"] = (data["where"].str.replace(r"[^\w\s-]", " ")
@@ -95,23 +108,27 @@ def clean_data(data):
     data["per_person"] = data["price"]/data["int_bed"]
     return(data)
 
-    #loc_count = data["where"].value_counts() #reducing levels
-    #mask = data["where"].isin(loc_count[loc_count < 5].index)
-    #data.ix[mask, "where"] = "other" #replace  rare locations with "other"
 
-def create_matrices(data, data_val): #this is tricky with a validation set.
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#models and data preprocessing:
 
-    all_data = pd.concat([data, data_val],1)
 
-    data_cat = pd.get_dummies(data[["where", "hour", "dayofweek"]])
-    feats = data_cat.columns
-    data_cat = sparse.csr_matrix(data_cat.values)
+#makes the dataframes ready for get_dummies:
+def categorize(data, where_labels, bed_labels):
+    data["where"] = data["where"].astype("object")
+    data["where"] = data["where"].astype("category", categories = where_labels)
+    data["num_bed"] = data["num_bed"].astype("category", categories = bed_labels)
+    return(data)
 
-    vect = CountVectorizer(stop_words="english", min_df = 1, ngram_range=(1,2))
-    data_text = vect.fit_transform(data["name"])
 
-    X = sparse.hstack((data_cat, data_text))
-    feats = np.hstack((feats, vect.get_feature_names()))
-    y = data.price
+def generate_data(data, vect):
 
-    return(X, y, feats)
+    cols = ["has_image", "num_bed", "where", "hour", "dayofweek"]
+    data_num = data[cols]
+    X_num = pd.get_dummies(data_num)
+
+    #text:
+    X_text = vect.transform(data["name"])
+    X_text = pd.DataFrame(X_text.toarray(), columns = vect.get_feature_names())
+    X = pd.concat((X_num, X_text), 1)
+    return(X)
